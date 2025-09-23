@@ -240,6 +240,10 @@ DEFAULT_COMPONENTS = [
 async def initialize_default_data():
     """Initialize default components if collection is empty"""
     try:
+        if db is None:
+            print("Firebase not initialized, skipping default data initialization")
+            return
+            
         components_ref = db.collection('components')
         docs = components_ref.limit(1).stream()
         

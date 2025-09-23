@@ -1,0 +1,28 @@
+
+> app@0.1.0 dev
+> next dev --turbopack --port 3000
+
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://10.227.11.218:3000
+
+ ✓ Starting...
+ ✓ Ready in 1930ms
+ ○ Compiling / ...
+ ✓ Compiled / in 21.5s
+ GET / 200 in 12187ms
+ GET / 200 in 497ms
+ GET / 200 in 357ms
+ HEAD / 200 in 305ms
+ GET / 200 in 470ms
+ GET / 200 in 303ms
+ GET / 200 in 284ms
+ GET / 200 in 281ms
+ GET / 200 in 274ms
+ GET /?x_request_source=preview 200 in 283ms
+ ⚠ Cross origin request detected from fix-my-code-10.preview.emergentagent.com to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ✓ Compiled in 1052ms
+ ✓ Compiled in 703ms
+ ✓ Compiled in 659ms
+ GET / 200 in 1175ms

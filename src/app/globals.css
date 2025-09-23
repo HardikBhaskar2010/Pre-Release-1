@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+@theme {
+/* Black Theme Colors */
+--color-background: #000000;
+--color-foreground: #ffffff;
+--color-card: #0a0a0a;
+--color-card-foreground: #ffffff;
+--color-popover: #0a0a0a;
+--color-popover-foreground: #ffffff;
+--color-primary: #8b5cf6;
+--color-primary-foreground: #ffffff;
+--color-secondary: #1a1a1a;
+--color-secondary-foreground: #ffffff;
+--color-muted: #111111;
+--color-muted-foreground: #a1a1a1;
+--color-accent: #2a1f3f;
+--color-accent-foreground: #c4b5fd;
+--color-destructive: #ef4444;
+--color-destructive-foreground: #ffffff;
+--color-border: #262626;
+--color-input: #262626;
+--color-ring: #8b5cf6;
+--color-chart-1: #8b5cf6;
+--color-chart-2: #6366f1;
+--color-chart-3: #a78bfa;
+--color-chart-4: #c084fc;
+--color-chart-5: #7c3aed;
+--color-sidebar: #0a0a0a;
+--color-sidebar-foreground: #ffffff;
+--color-sidebar-primary: #8b5cf6;
+--color-sidebar-primary-foreground: #ffffff;
+--color-sidebar-accent: #1a1a1a;
+--color-sidebar-accent-foreground: #ffffff;
+--color-sidebar-border: #262626;
+--color-sidebar-ring: #8b5cf6;
+--radius-lg: 1rem;
+--radius-md: calc(1rem - 4px);
+--radius-sm: calc(1rem - 8px);
+--animate-accordion-down: accordion-down 0.2s ease-out;
+@keyframes accordion-down {
+from { height: 0; }
+to { height: var(--radix-accordion-content-height); }
+}
+--animate-accordion-up: accordion-up 0.2s ease-out;
+@keyframes accordion-up {
+from { height: var(--radix-accordion-content-height); }
+to { height: 0; }
+}
+--font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+--color-brand: #8b5cf6;
+--color-brand-soft: #2a1f3f;
+--color-neutral-soft: #111111;
+}
+/*
+The default border color has changed to currentColor in Tailwind CSS v4,
+so we've added these compatibility styles to make sure everything still
+looks the same as it did with Tailwind CSS v3.
+If we ever want to remove these styles, we need to add an explicit border
+color utility to any element that depends on these defaults.
+*/
+@layer base {
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+border-color: #262626;
+}
+}
+@layer utilities {
+body { font-family: var(--font-sans); }
+}
+@layer base {
+:root {
+--background: var(--color-background);
+--foreground: var(--color-foreground);
+--card: var(--color-card);
+--card-foreground: var(--color-card-foreground);
+--popover: var(--color-popover);
+--popover-foreground: var(--color-popover-foreground);
+--primary: var(--color-primary);
+--primary-foreground: var(--color-primary-foreground);
+--secondary: var(--color-secondary);
+--secondary-foreground: var(--color-secondary-foreground);
+--muted: var(--color-muted);
+--muted-foreground: var(--color-muted-foreground);
+--accent: var(--color-accent);
+--accent-foreground: var(--color-accent-foreground);
+--destructive: var(--color-destructive);
+--destructive-foreground: var(--color-destructive-foreground);
+--border: var(--color-border);
+--input: var(--color-input);
+--ring: var(--color-ring);
+--chart-1: var(--color-chart-1);
+--chart-2: var(--color-chart-2);
+--chart-3: var(--color-chart-3);
+--chart-4: var(--color-chart-4);
+--chart-5: var(--color-chart-5);
+--radius: var(--radius-lg);
+--sidebar-background: var(--color-sidebar);
+--sidebar-foreground: var(--color-sidebar-foreground);
+--sidebar-primary: var(--color-sidebar-primary);
+--sidebar-primary-foreground: var(--color-sidebar-primary-foreground);
+--sidebar-accent: var(--color-sidebar-accent);
+--sidebar-accent-foreground: var(--color-sidebar-accent-foreground);
+--sidebar-border: var(--color-sidebar-border);
+--sidebar-ring: var(--color-sidebar-ring);
+}
+}
+@layer base {
+body {
+@apply bg-background text-foreground;
+/* Android-optimized touch interactions */
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-webkit-tap-highlight-color: transparent;
+touch-action: manipulation;
+}
+.container {
+margin-inline: auto;
+padding-inline: 2rem;
+}
+/* Mobile-first responsive containers */
+@media (max-width: 640px) {
+  .container {
+    padding-inline: 1rem;
+  }
+}
+/* Touch-friendly interactive elements */
+button, [role="button"], .touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+/* Smooth scrolling for mobile */
+html {
+  scroll-behavior: smooth;
+}
+/* Android-specific optimizations */
+input, textarea, select {
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+}
+@layer base {
+html {
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-rendering: optimizeLegibility;
+font-family: var(--font-sans);
+color: var(--foreground);
+background-color: var(--background);
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-sans);
+color: var(--foreground);
+font-weight: 700;
+letter-spacing: -0.01em;
+}
+p { color: var(--foreground); font-weight: 500; }
+small, .text-muted-foreground { color: var(--color-muted-foreground); font-weight: 500; }
+a { color: var(--color-primary); text-decoration: none; }
+.font-sans { font-family: var(--font-sans); }
+}
+
+/* Hide Next.js error overlay portal */
+nextjs-portal {
+  display: none !important;
+}

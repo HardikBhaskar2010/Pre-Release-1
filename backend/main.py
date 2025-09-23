@@ -48,11 +48,16 @@ FIREBASE_CONFIG = {
 }
 
 # Initialize Firebase (only if not already initialized)
-if not firebase_admin._apps:
-    cred = credentials.Certificate(FIREBASE_CONFIG)
-    firebase_admin.initialize_app(cred)
-
-db = firestore.client()
+try:
+    if not firebase_admin._apps:
+        cred = credentials.Certificate(FIREBASE_CONFIG)
+        firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    print("Firebase initialized successfully")
+except Exception as e:
+    print(f"Firebase initialization failed: {e}")
+    print("Running in development mode without Firebase")
+    db = None
 
 # Pydantic Models
 class ComponentSpec(BaseModel):

@@ -276,29 +276,35 @@ async def get_components(
 ):
     """Get all components with optional filtering"""
     try:
-        components_ref = db.collection('components')
-        query = components_ref.limit(limit)
-        
-        # Apply category filter
-        if category and category.lower() != 'all':
-            query = query.where('category', '==', category)
-        
-        docs = query.stream()
-        components = []
-        
-        for doc in docs:
-            data = doc.to_dict()
-            data['id'] = doc.id
+        if db is None:
+            # Return default components when Firebase is not available
+            components = DEFAULT_COMPONENTS.copy()
+        else:
+            components_ref = db.collection('components')
+            query = components_ref.limit(limit)
             
-            # Apply search filter
-            if search:
-                search_term = search.lower()
-                if (search_term in data['name'].lower() or 
-                    search_term in data['description'].lower() or 
-                    search_term in data['category'].lower()):
-                    components.append(data)
-            else:
+            # Apply category filter
+            if category and category.lower() != 'all':
+                query = query.where('category', '==', category)
+            
+            docs = query.stream()
+            components = []
+            
+            for doc in docs:
+                data = doc.to_dict()
+                data['id'] = doc.id
                 components.append(data)
+        
+        # Apply search filter
+        if search:
+            search_term = search.lower()
+            filtered_components = []
+            for comp in components:
+                if (search_term in comp['name'].lower() or 
+                    search_term in comp['description'].lower() or 
+                    search_term in comp['category'].lower()):
+                    filtered_components.append(comp)
+            components = filtered_components
         
         return components
     except Exception as e:
